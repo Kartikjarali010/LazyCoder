@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Now - Healthcare Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1c1c1c, #333);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            padding: 50px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .section {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .section h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .payment-methods h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .payment-methods label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .payment-methods input[type="text"],
+        .payment-methods input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+        }
+
+        .pay-button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #00d4ff, #0056b3);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: inline-block;
+        }
+
+        .pay-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #0056b3, #00d4ff);
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 180px;
+            margin: 10px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .payment-option input {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Pay Now</h2>
+
+        <div class="section">
+            <h3>Amount to Pay</h3>
+            <p id="amountToPay">₹0.00</p>
+        </div>
+
+        <div class="payment-methods">
+            <h3>Select Payment Method</h3>
+
+            <div class="payment-options">
+                <!-- Credit Card -->
+                <div class="payment-option">
+                    <h4>Credit Card</h4>
+                    <label for="creditCardNumber">Card Number:</label>
+                    <input type="text" id="creditCardNumber" placeholder="1234 5678 9012 3456">
+                    <label for="creditCardExpiry">Expiry Date:</label>
+                    <input type="text" id="creditCardExpiry" placeholder="MM/YY">
+                    <label for="creditCardCVV">CVV:</label>
+                    <input type="number" id="creditCardCVV" placeholder="123">
+                    <button class="pay-button"><a href="/paid/index.html" style="text-decoration: none;">Pay with Credit Card</a></button>
+                </div>
+
+                <!-- Bitcoin -->
+                <div class="payment-option">
+                    <h4>Bitcoin</h4>
+                    <label for="bitcoinAddress">Bitcoin Address:</label>
+                    <input type="text" id="bitcoinAddress" placeholder="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa">
+                    <button class="pay-button"><a href="/paid/index.html" style="text-decoration: none;">Pay with Bitcoin</a></button>
+                </div>
+
+                <!-- Monero -->
+                <div class="payment-option">
+                    <h4>Monero</h4>
+                    <label for="moneroAddress">Monero Address:</label>
+                    <input type="text" id="moneroAddress" placeholder="44AFFq5kSiGBoZ...">
+                    <button class="pay-button"><a href="/paid/index.html" style="text-decoration: none;">Pay with Monero</a></button>
+                </div>
+
+                <div class="payment-option">
+                    <h4>YoMo M Coins</h4>
+                    <label for="yomoCoins">YoMo M Coin Wallet:</label>
+                    <input type="text" id="yomoCoins" placeholder="Your YoMo M Wallet ID">
+                    <button class="pay-button"><a href="/paid/index.html" style="text-decoration: none;">Pay with YoMo M Coins</a></button>
+                </div>
+
+                <div class="payment-option">
+                    <h4>UPI</h4>
+                    <label for="upiID">UPI ID:</label>
+                    <input type="text" id="upiID" placeholder="yourname@bank">
+                    <button class="pay-button"><a href="/paid/index.html" style="text-decoration: none;">Pay with UPI</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function populateAmount() {
+            const params = new URLSearchParams(window.location.search);
+            const cost = params.get("cost") || "0.00";
+            document.getElementById("amountToPay").textContent = `₹${cost}`;
+        }
+
+        window.onload = populateAmount;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen Hospital Booking Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1c1c1c, #333);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0056b3, #00d4ff);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150%;
+            height: 150%;
+            z-index: 0;
+        }
+
+        .profile-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 1000;
+        }
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+        }
+
+        .profile-container.active .dropdown-menu {
+            display: block;
+            z-index: 10000;
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown-menu ul li {
+            padding: 10px 20px;
+            background: #444;
+            border-bottom: 1px solid #555;
+        }
+
+        .dropdown-menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .dropdown-menu ul li a:hover {
+            background: #0056b3;
+            color: #fff;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 70%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input[type="text"]::placeholder {
+            color: #ccc;
+        }
+
+        .search-bar button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #00d4ff, #0056b3);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: scale(1.05);
+        }
+
+        .hospital-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .hospital-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .hospital-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .hospital-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #0056b3;
+        }
+
+        .hospital-card h3 {
+            margin: 20px;
+            font-size: 1.8em;
+            color: #00d4ff;
+        }
+
+        .hospital-card p {
+            margin: 0 20px 20px;
+            color: #ccc;
+        }
+
+        .hospital-card button {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #00ffb3);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hospital-card button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0056b3, #00d4ff);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150%;
+            height: 150%;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<script>
+    function searchHospitals() {
+        let input = document.querySelector('.search-bar input[type="text"]').value.toLowerCase();
+        
+        let hospitals = document.querySelectorAll('.hospital-card');
+
+        hospitals.forEach(hospital => {
+            let hospitalName = hospital.querySelector('h3').innerText.toLowerCase();
+            let hospitalLocation = hospital.querySelector('p').innerText.toLowerCase();
+            
+            if (hospitalName.includes(input) || hospitalLocation.includes(input)) {
+                hospital.style.display = 'block';
+            } else {
+                hospital.style.display = 'none';
+            }
+        });
+
+        if (input === '') {
+            hospitals.forEach(hospital => {
+                hospital.style.display = 'block';
+            });
+        }
+    }
+
+    document.querySelector('.search-bar button').addEventListener('click', searchHospitals);
+
+    document.querySelector('.search-bar input[type="text"]').addEventListener('input', searchHospitals);
+</script>
+
+
+<body>
+    <header>
+        <h1>Next-Gen Hospital Booking Platform</h1>
+        <div class="profile-container">
+            <div class="profile-box">
+                <img src="/assets/Japan.jpg" alt="Profile Picture" class="profile-pic">
+            </div>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="#" id="home-link">Home</a></li>
+                    <li><a href="#" id="profile-link">My Profile</a></li>
+                    <li><a href="#" id="settings-link">Settings</a></li>
+                    <li><a href="signout.php">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="content">
+            <h2>Welcome to Next-Gen Hospital Booking Platform</h2>
+            <p>This platform allows you to manage hospital bookings, view your profile, and adjust your settings.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for hospitals near you...">
+                <button>Search</button>
+            </div>
+
+            <div class="hospital-list">
+                <div class="hospital-card">
+                    <img src="/assets/RevaH.jpg" alt="Hospital Image">
+                    <h3>Reva Hospital</h3>
+                    <p>Location: Bangalore, City Center</p>
+                    <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=Reva%20Hospital&hospitalLocation=Bangalore">Book Appointment</a></button>
+                </div>
+                <div class="hospital-card">
+                    <img src="/assets/Hospital.jpg" alt="Hospital Image">
+                    <h3>Goverment Hospital</h3>
+                    <p>Location: Karnataka, Suburbs</p>
+                    <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=Government%20Hospital&hospitalLocation=Karnataka">Book Appointment</a></button>
+                </div>
+                <div class="hospital-card">
+                    <img src="/assets/XYZHospital.jpg" alt="Hospital Image">
+                    <h3>XYZ Medical Center</h3>
+                    <p>Location: North, Uptown</p>
+                    <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=XYZ%20Medical%20Center&hospitalLocation=North">Book Appointment</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Next-Gen Hospital Booking Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profilePic = document.querySelector('.profile-pic');
+            const profileContainer = document.querySelector('.profile-container');
+            const content = document.getElementById('content');
+            const homeLink = document.getElementById('home-link');
+            const profileLink = document.getElementById('profile-link');
+            const settingsLink = document.getElementById('settings-link');
+
+            profilePic.addEventListener('click', (event) => {
+                event.stopPropagation();
+                profileContainer.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!profileContainer.contains(event.target)) {
+                    profileContainer.classList.remove('active');
+                }
+            });
+
+            homeLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                content.innerHTML = `
+                    <h2>Welcome to Next-Gen Hospital Booking Platform</h2>
+                    <p>This platform allows you to manage hospital bookings, view your profile, and adjust your settings.</p>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for hospitals near you...">
+                        <button>Search</button>
+                    </div>
+
+                    <div class="hospital-list">
+                        <div class="hospital-card">
+                            <img src="/assets/RevaH.jpg" alt="Hospital Image">
+                            <h3>Reva Hospital</h3>
+                            <p>Location: Downtown, City Center</p>
+                            <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=Reva+Hospital&hospitalLocation=Bangalore">Book Appointment</a></button>
+                        </div>
+                        <div class="hospital-card">
+                            <img src=""/assets/Hospital.jpg" alt="Hospital Image">
+                            <h3>Goverment Hospital</h3>
+                            <p>Location: Green Valley, Suburbs</p>
+                            <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=Goverment+Hospital&hospitalLocation=Karnataka">Book Appointment</a></button>
+                        </div>
+                        <div class="hospital-card">
+                            <img src="/assets/XYZHospital.jpg" alt="Hospital Image">
+                            <h3>XYZ Medical Center</h3>
+                            <p>Location: North Ridge, Uptown</p>
+                            <button><a style="text-decoration: none;" href="/appointment/index.html?hospitalName=XYZ+Medical+Center&hospitalLocation=North+Ridge">Book Appointment</a></button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            profileLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                content.innerHTML = `
+                    <h2>My Profile</h2>
+                    <p>Here you can update your profile information.</p>
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name"><br><br>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email"><br><br>
+                        <button type="submit">Update Profile</button>
+                    </form>
+                `;
+            });
+
+            settingsLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                content.innerHTML = `
+                    <h2>Settings</h2>
+                    <p>Here you can change your account settings.</p>
+                    <form>
+                        <label for="password">New Password:</label>
+                        <input type="password" id="password" name="password" placeholder="New Password"><br><br>
+                        <label for="password-confirm">Confirm Password:</label>
+                        <input type="password" id="password-confirm" name="password-confirm" placeholder="Confirm New Password"><br><br>
+                        <button type="submit">Update Settings</button>
+                    </form>
+                `;
+            });
+        });
+    </script>
+</body>
+
+</html>
