@@ -5,82 +5,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next-Gen Healthcare Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styles */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1c1c1c, #333);
+            background: linear-gradient(135deg, #6b73ff, #000dff);
             color: #fff;
             overflow-x: hidden;
-        }
-
-        .hero {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        .container {
             text-align: center;
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15), transparent);
             position: relative;
-            overflow: hidden;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            max-width: 90%;
+            width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
         }
 
-        .hero h1 {
-            font-size: 4em;
-            margin: 0;
-            animation: fadeInDown 1s ease-in-out;
+        .container h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-out;
         }
 
-        .hero p {
-            font-size: 1.5em;
-            margin: 20px 0;
-            animation: fadeInUp 1.5s ease-in-out;
+        .container p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: fadeIn 2s ease-out;
         }
 
-        .hero button {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #00d4ff, #0056b3);
+        .hero-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ff7c7c, #ff3a3a);
             color: #fff;
             border: none;
             border-radius: 50px;
             font-size: 1.2em;
             cursor: pointer;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: transform 0.3s ease, background 0.3s ease;
-            animation: fadeInUp 2s ease-in-out;
+            animation: fadeIn 2.5s ease-out;
         }
 
-        .hero button:hover {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #0056b3, #00d4ff);
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #ff3a3a, #ff7c7c);
         }
 
-        @keyframes fadeInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-btn:active {
+            transform: translateY(2px);
         }
 
-        @keyframes fadeInUp {
+        /* Animations */
+        @keyframes fadeIn {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             100% {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Floating background shapes */
         .floating-shapes {
             position: absolute;
             top: 0;
@@ -88,29 +102,29 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            overflow: hidden;
+            z-index: -1;
         }
 
         .floating-shape {
             position: absolute;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.05);
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            animation: float 10s infinite ease-in-out;
-            opacity: 0.8;
+            animation: float 12s infinite ease-in-out;
+            opacity: 0.6;
         }
 
         .floating-shape:nth-child(1) {
-            top: 10%;
-            left: 15%;
-            animation-duration: 12s;
+            top: 15%;
+            left: 10%;
+            animation-duration: 14s;
         }
 
         .floating-shape:nth-child(2) {
-            top: 40%;
+            top: 50%;
             left: 70%;
-            animation-duration: 15s;
+            animation-duration: 18s;
         }
 
         .floating-shape:nth-child(3) {
@@ -121,30 +135,52 @@
 
         @keyframes float {
             0% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
-
             50% {
-                transform: translateY(-20px) rotate(20deg);
+                transform: translateY(-30px) rotate(30deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
             }
 
-            100% {
-                transform: translateY(0);
+            .container h1 {
+                font-size: 2.5em;
+            }
+
+            .container p {
+                font-size: 1em;
+            }
+
+            .hero-btn {
+                font-size: 1.1em;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="hero">
-        <h1>Welcome to the Future of Healthcare</h1>
-        <p>Your health, our priority. Experience seamless and modern healthcare services.</p>
-        <button onclick="window.location.href='get-started.html'">Get Started</button>
 
-        <div class="floating-shapes">
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-        </div>
+    <div class="floating-shapes">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
     </div>
+
+    <div class="container">
+        <h1>Welcome to the Future of Healthcare</h1>
+        <p>Your health, our priority. Experience seamless and modern healthcare services designed for the digital age.</p>
+        <button class="hero-btn" onclick="window.location.href='get-started.html'">Get Started</button>
+    </div>
+
 </body>
+
+</html>

@@ -5,89 +5,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - Healthcare Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
+        /* Global Styles */
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1c1c1c, #333);
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6b73ff, #000dff); /* New purple-blue gradient */
             color: #fff;
             overflow-x: hidden;
         }
 
+        h1, h2 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
         .container {
-            padding: 50px;
             max-width: 1200px;
             margin: auto;
+            padding: 40px;
             text-align: center;
         }
 
-        .container h2 {
-            font-size: 3em;
-            margin-bottom: 30px;
-            animation: fadeInDown 1s ease-in-out;
+        .heading {
+            margin-bottom: 50px;
         }
 
+        .heading h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+        }
+
+        .heading p {
+            font-size: 1.1rem;
+            color: #ddd; /* Lighter text for contrast */
+            margin-bottom: 40px;
+        }
+
+        /* Steps Layout */
         .steps {
             display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
+            justify-content: space-evenly;
+            align-items: center;
             flex-wrap: wrap;
+            gap: 30px;
         }
 
         .step {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
-            padding: 20px;
-            margin: 20px;
+            padding: 25px;
             width: 300px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 1.5s ease-in-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .step h3 {
-            font-size: 1.8em;
-            color: #00d4ff;
-            margin-bottom: 15px;
-        }
-
-        .step p {
-            font-size: 1.2em;
-            color: #ccc;
+        .step:hover {
+            transform: translateY(-10px);
         }
 
         .step-icon {
-            font-size: 3em;
+            font-size: 3rem;
+            color: #6b73ff; /* Light purple icon color */
+            margin-bottom: 20px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .step h3 {
+            font-size: 1.7rem;
             margin-bottom: 15px;
-            color: #00d4ff;
-            animation: bounce 2s infinite;
+            color: #6b73ff; /* Light purple text color for headers */
+        }
+
+        .step p {
+            font-size: 1.1rem;
+            color: #ddd; /* Light gray for text */
         }
 
         @keyframes bounce {
-            0% {
+            0%, 100% {
                 transform: translateY(0);
             }
 
             50% {
                 transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -103,52 +113,79 @@
             }
         }
 
+        /* CTA Button */
         .cta-button {
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #00d4ff, #0056b3);
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #6b73ff, #000dff); /* Purple-blue gradient */
             color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
             border: none;
             border-radius: 50px;
-            font-size: 1.2em;
             cursor: pointer;
-            margin-top: 30px;
+            text-transform: uppercase;
+            margin-top: 40px;
             transition: transform 0.3s ease, background 0.3s ease;
-            animation: fadeInUp 2s ease-in-out;
         }
 
         .cta-button:hover {
             transform: scale(1.1);
-            background: linear-gradient(135deg, #0056b3, #00d4ff);
+            background: linear-gradient(135deg, #000dff, #6b73ff); /* Inverted gradient on hover */
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h2>Get Started with Your Healthcare Journey</h2>
 
+    <div class="container">
+        <div class="heading">
+            <h2>Get Started with Your Healthcare Journey</h2>
+            <p>We’re here to help you take control of your healthcare with advanced features, seamless scheduling, and accurate predictions.</p>
+        </div>
+
+        <!-- Steps Section -->
         <div class="steps">
             <div class="step">
                 <div class="step-icon">&#x1F551;</div>
-                <h3>OPD Wait Time Prediction & Optimization</h3>
-                <p>Leverage our advanced queuing model to predict and minimize your wait time at OPDs. Ensure a more efficient visit and reduce unnecessary delays.</p>
+                <h3>OPD Wait Time Prediction</h3>
+                <p>Our advanced queuing model predicts and minimizes your wait time at OPDs, ensuring a smooth and efficient visit.</p>
             </div>
 
             <div class="step">
                 <div class="step-icon">&#x1F4B8;</div>
                 <h3>Real-Time Price Estimation</h3>
-                <p>Get instant, accurate cost estimates for treatments and procedures before you even book your appointment. Plan your healthcare expenses with confidence.</p>
+                <p>Get accurate cost estimates for treatments and procedures before booking. Plan your healthcare expenses with confidence.</p>
             </div>
 
             <div class="step">
                 <div class="step-icon">&#x1F4BB;</div>
                 <h3>Book Appointments</h3>
-                <p>You can easily schedule appointments with top-rated doctors at your convenience, ensuring that you receive the best care possible. Our platform allows you to choose from a wide network of highly qualified and experienced specialists.</p>
+                <p>Schedule appointments with top-rated doctors. Choose from a wide network of highly qualified specialists at your convenience.</p>
             </div>
         </div>
 
         <button class="cta-button" onclick="window.location.href='/Sign-in'">Explore Now</button>
     </div>
+
 </body>
 
 </html>
